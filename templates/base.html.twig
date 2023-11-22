@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fr">
+
+<head
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block css_base %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- Our custom CSS -->
+    <link rel="stylesheet" href="{{ asset("css/base.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/main.css") }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia&display=swap">
+    {% endblock %}
+
+    {% block css_user %}{% endblock %}
+
+    {% block javascript_base %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% endblock %}
+
+    {% block javascript_user %} {% endblock %}
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ asset("images/favicon.png") }}" type="image/x-icon">
+    <title>
+        {% block title %}Logo
+        {% endblock %}
+    </title>
+
+    {% block javascript_nav %}
+    <script>
+        $(document).ready(function () { // Lorsque le bouton est cliqué
+            $('.nav-link').on('click', function () { // Ajouter la classe "btn-clicked" au bouton
+                $(this).addClass('btn-clicked');
+            });
+        });
+    </script>
+    {% endblock %}
+
+    {% block javascripts_excerpt %}{% endblock %}
+
+
+</head>
+
+<body>
+    <!-- Image de fond -->
+    <div class="image-bg" style="background-image: url('{{ asset('images/7.jpg') }}');">
+    </div>
+
+    {% block nav %}
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark custom-navbar-bg">
+        <div class="container-fluid">
+            <!-- Logo, titre et lien "Accueil" centrés -->
+            <div class="d-flex justify-content-center align-items-center">
+                <a href="{{ path("home") }}"
+                    class="ms-3 d-flex align-items-center text-decoration-none header-logo">
+                    <img src="{{ asset("images/favicon.png") }}"
+                        class="favicon" alt="Logo GRV">
+                    <span class="ms-3 header-logo__title text-success">Rendez-Vous</span>
+                </a>
+                
+            <div class="title-accueil-space"></div> {# Espace entre le titre et le lien "Accueil" #}
+                <ul class="navbar-nav">
+                    <li class="nav-item nav-item-green ">
+                        <a class="nav-link vertical-align-middle {% block nav_active_home %}{% endblock %}" href="{{ path('home') }}">
+                         <i class="bi bi-house me-2"></i>Accueil
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+             {% endblock %}
+
+            <div class="collapse navbar-collapse justify-content-center"
+                id="navbarSupportedContent">
+                 {% block nav_custom %}
+                <!-- Liens des sous-pages -->
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                     
+                        <li class="nav-item-yellow">
+                            <a class="nav-link {% block nav_active_users %}{% endblock %}"
+                                href="{{ path('app_users_index') }}">
+                                <i class="bi bi-people me-2"></i>Utilisateurs
+                            </a>
+                        </li>
+                    
+                        <li class="nav-item-yellow">
+                            <a class="nav-link {% block nav_active_products %}{% endblock %}"
+                                href="{{"#"}}">
+                                <i class="bi bi-basket me-2"></i>Mes rendez-vous
+                            </a>
+                        </li>
+                
+                        <li class="nav-item-yellow">
+                            <a class="nav-link {% block nav_active_posts %}{% endblock %}"
+                                href="{{ "#" }}">
+                                <i class="bi bi-book me-2"></i>Prendre un rendez-vous
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item nav-item-yellow">
+                            <a class="nav-link {% block nav_active_favorites %}{% endblock %}"
+                                href="{{"#"}}">
+                                <i class="bi bi-flower1 me-2"></i>Contacts
+                            </a>
+                        </li>
+                     
+                </ul>
+                {% endblock %}
+            </div>
+          
+
+            {% block connect %}
+            <div class="ms-auto">
+                <!-- Connexion/Déconnexion -->
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <!-- L'utilisateur est connecté -->
+                    <li class="nav-item nav-item-connect">
+                        <a class="nav-link" href="#">
+                            <span class="greeting">Bonjour &nbsp;{{ app.user.username|upper }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ml-3">
+                        <a href="{{ path('login_logout') }}" class="nav-link btn btn-danger me-2">
+                            Déconnexion
+                        </a>
+                    </li>
+                    {% else %}
+                    <!-- L'utilisateur n'est pas connecté -->
+                    <li class="nav-item ml-3">
+                        <a href="{{"#"}}" class="btn btn-danger me-2">
+                            Connexion
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endblock %}
+
+        </div>
+    </nav>
+  
+
+    {% block before_body %}
+    
+        <div class="background-container">
+           
+    {% endblock %}
+
+    {% block search %}
+     {% endblock %}
+    
+    {# {{ include('utils/_flash.html.twig') }} #}
+
+    {% block body %}{% endblock %}
+    {% block after_body %}{% endblock %}
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

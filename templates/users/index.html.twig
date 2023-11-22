@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des utilisateurs
+{% endblock %}
+
+{% block body %}
+	<h1 class= "text-light">Index des utilisateurs</h1><br>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Adresse</th>
+				<th>Code Postal</th>
+				<th>Ville</th>
+				<th>E-mail</th>
+				<th>Téléhone</th>
+				<th>Rôle</th>
+				<th>Objectif</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.Name }}</td>
+					<td>{{ user.FirstName }}</td>
+					<td>{{ user.Address }}</td>
+					<td>{{ user.ZipCode }}</td>
+					<td>{{ user.Town }}</td>
+					<td>{{ user.Email }}</td>
+					<td>{{ user.Phone }}</td>
+					<td>
+						{% if user.role is iterable %}
+							{{ user.role|join(', ') }}
+						{% else %}
+							{{ user.role }}
+						{% endif %}
+					</td>
+					<td>{{ user.Objectif }}</td>
+					<td>
+						<a href="{{ path('app_users_show', {'id': user.id}) }}" class="btn btn-primary btn-sm">voir</a>
+						<a href="{{ path('app_users_edit', {'id': user.id}) }}" class="btn btn-primary btn-sm">modifier</a>
+						<a href="{{ path('app_users_delete',{'id': user.id}) }}" class="btn btn-danger btn-sm">supprimer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="11">Il n'existe aucun enregistrement</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table><br>
+	
+	<a href="{{ path('app_users_new') }}" class="btn btn-warning">Ajout un nouvel utilisateur</a>
+{% endblock %}

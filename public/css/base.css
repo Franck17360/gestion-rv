@@ -1,0 +1,145 @@
+/* template BASE */
+body,
+html {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-radius: 30px;
+}
+
+.image-bg {
+    background-image: url("{{ asset('images/7.jpg') }}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    
+}
+
+/* Effet voilé / Voir block before_body */
+.background-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    top: 220px;
+    bottom: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: 80vh; /* Hauteur de départ à 80vh */
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding-left: 60px;
+    padding-right: 60px;
+    z-index: 1000;
+}
+
+/* En-tête logo*/
+.favicon {
+    height: 80px;
+    transition: transform 0.2s;
+    width: 85px;
+    background-color: rgb(60, 60, 60);
+    border-radius: 50px;
+    position: relative;  
+}
+
+.favicon:hover {
+    transform: scale(2) translateX(15px) translateY(10px);
+    z-index:2000 ;
+}
+
+.header-logo__title {
+    font-size: 1.8em;
+    text-transform: capitalize;
+    font-family: 'Arial', Times, serif;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin-right: 180px!important;
+}
+
+/* Navbar */
+
+/* Couleur du texte des liens de navigation */
+.navbar-dark .navbar-nav .nav-link {
+    color: #f8f9fa; /* Couleur blanche plus foncée */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: auto;
+    overflow-y: hidden;
+    z-index: 1500;
+}
+
+.navbar-collapse {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.custom-navbar-bg {
+    border: 2px solid #353434;
+    height: 90px;
+    margin-top: 70px;
+}
+
+.title-accueil-space {
+    margin-left: 30px;
+}
+
+.nav-item {
+    font-size: 18px;
+}
+.bi-house {
+    font-size: 1.2rem;
+}
+
+.nav-item-green .nav-link {
+    color: rgb(151, 197, 82)!important;
+    border: 2px solid rgb(151, 197, 82);
+    border-radius: 50px;
+    transition: transform 0.2s;
+}
+
+.nav-item-green .nav-link:hover {
+    color: rgb(151, 197, 82)!important;
+    border: 2px solid rgb(151, 197, 82);
+    border-radius: 50px;
+    transform: scale(1.1)
+}
+
+
+.nav-item-yellow .nav-link {
+    word-spacing: 3px;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.nav-item-yellow .nav-link:hover {
+    color: rgb(151, 197, 82)!important;
+    border: 2px solid rgb(151, 197, 82);
+    border-radius: 50px;
+}
+
+.nav-item-connect .nav-link {
+    font-size: 18px;
+}
+
+.nav-item-connect .nav-link:hover {
+    color: rgb(151, 197, 82)!important;
+}
+
+.greeting {
+    margin-right: 5px;
+}
