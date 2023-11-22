@@ -2,72 +2,68 @@
 
 namespace App\Entity;
 
-use App\Repository\UsersRepository;
+use App\Repository\ContactsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ORM\Entity(repositoryClass: UsersRepository::class)]
-class Users
+#[ORM\Entity(repositoryClass: ContactsRepository::class)]
+class Contacts
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[Groups(['get_users'])]
-    private ?int $id ;
+    #[Groups(['get_contacts'])]
+    private ?int $id;
 
     #[ORM\Column(type: "string",length: 255)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?string $Name ;
 
     #[ORM\Column(type: "string", length: 255)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?string $FirstName ;
 
     #[ORM\Column(type: "string", nullable : false, length: 255 )]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
 
     private ?string $password;
 
     #[ORM\Column(type: "string", length: 255)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?string $Address ;
 
     #[ORM\Column(type: "string", length: 16)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?string $ZipCode ;
 
     #[ORM\Column(type: "string", length: 80)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?string $Town ;
 
     #[ORM\Column(type: "string", length: 255)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?string $Email ;
 
     #[ORM\Column(type:"string", length: 16)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?string $Phone ;
 
     #[ORM\Column(type: "array", length: 80)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?array $role ;
 
     #[ORM\Column(type: "string", length: 255)]
-    #[Groups(['get_users'])]
+    #[Groups(['get_contacts'])]
     private ?string $Objectif ;
 
     #[ORM\ManyToMany(targetEntity: RendezVous::class, mappedBy: 'UtilisateurId')]
+    #[Groups(['get_contacts'])]
     private Collection $Id;
 
     public function __construct()
     {
         $this->Id = new ArrayCollection();
-    }
-
-    public function getId(): ?string
-    {
-        return $this->id;
     }
 
     public function getName(): ?string
@@ -144,48 +140,33 @@ class Users
 
     #[ORM\Column(type: "string", length: 14)]
 
-    public function getPhone(): ?string
-    {
-        return $this->Phone;
-    }
-
-    public function setPhone(string $Phone): static
-    {
-        $this->Phone = $Phone;
-
-        return $this;
-    }
-
     public function getRole(): ?array
     {
         return $this->role;
     }
 
-    public function setRole(array $role): ?array
+    public function setRole(array $role): self
     {
-        return $this->role = $role;
-    }
-
-    public function getObjectif(): ?string
-    {
-        return $this->Objectif;
-    }
-
-    public function setObjectif(string $objectif): static
-    {
-        $this->Objectif = $objectif;
-
+        $this->role = $role;
         return $this;
     }
 
-    /**
-     * Get the value of password
-     */ 
+    public function getPhone(): ?string
+    {
+        return $this->Phone;
+    }
+
+    public function setPhone(?string $Phone): self
+    {
+        $this->Phone = $Phone;
+        return $this;
+    }
+
     public function getPassword(): ?string
     {
         return $this->password;
     }
-   
+
     public function setPassword(string $password)
     {
         $this->password = password_hash($password, PASSWORD_BCRYPT);
